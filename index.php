@@ -48,35 +48,6 @@ else
     </div>
     <div id='principal'></div>
 <?php
-
-
-
-/*
-require_once('class/connectPDO.php');
-$connection = new connectPDO;
-
-$sql = "SELECT TRIM(CONCAT(COALESCE(first_name,''),' ',COALESCE(last_name,''))) as nombre,
-        programas, url_facebook, url_twitter
-        FROM cpj_users as u, cpj_locutores as l
-        WHERE u.id_user = l.id_user
-        AND u.id_user = ?";
-$params = array(1);
-
-$data = $connection->getrow($sql,$params);
-
-// Pre-procesamos la data
-$facebook = ($data['url_facebook']=='')?'&nbsp;':"<a href='{$data['url_facebook']}' target='_blank'> Ver perfil en Facebook</a>";
-$twitter = ($data['url_twitter']=='')?'&nbsp;':"<a href='{$data['url_twitter']}' target='_blank'> Ver Twitter</a>";
-
-$html = "<table>
-<tr><th>Nombre</th><td>{$data['nombre']}</td></tr>
-<tr><th>Programas</th><td>{$data['programas']}</td></tr>
-<tr><th>Facebook</th><td>{$facebook}</td></tr>
-<tr><th>Twitter</th><td>{$twitter}</td></tr>
-</table>";
-
-echo $html;
-*/
 ?>
 </body>
 </html>
