@@ -21,7 +21,7 @@ function getLocutorOnline()
     }
 
     $fecha_hasta = $connection->getone("SELECT DATE_FORMAT(tiempo_hasta, '%Y-%m-%d %H:%i') FROM cpj_online WHERE id_online = ?",array($_SESSION['auth']['id_online']));
-    $fecha_desde = $connection->getrow("SELECT YEAR(tiempo_desde) as year,MONTH(tiempo_desde) as month,DAY(tiempo_desde) as day,HOUR(tiempo_desde) hour,MINUTE(tiempo_desde) as minute from cpj_online WHERE id_online = ?",array($_SESSION['auth']['id_online']));
+    $fecha_desde = $connection->getrow("SELECT YEAR(tiempo_desde) as year,(MONTH(tiempo_desde)-1)  as month,DAY(tiempo_desde) as day,HOUR(tiempo_desde) hour,MINUTE(tiempo_desde) as minute from cpj_online WHERE id_online = ?",array($_SESSION['auth']['id_online']));
 
 
     $divInput = "oWtiempo_hastaW{$_SESSION['auth']['id_online']}";

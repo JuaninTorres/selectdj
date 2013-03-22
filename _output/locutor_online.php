@@ -73,8 +73,11 @@
 require_once('../class/connectPDO.php');
 $connection = new connectPDO;
 
-$data = $connection->getrow('SELECT cpj_users.* FROM cpj_online,cpj_users WHERE cpj_users.id_user = cpj_online.id_user AND NOW() BETWEEN tiempo_desde AND tiempo_hasta ORDER BY cpj_online.id_online DESC LIMIT 1');
-$autoLocutor = ($data===PDOWARNING)?true:false;
+$data = $connection->getrow('SELECT cpj_online.id_online, NOW() BETWEEN tiempo_desde AND tiempo_hasta as vigente,cpj_users.*
+FROM cpj_online,cpj_users
+WHERE cpj_users.id_user = cpj_online.id_user AND id_online = (SELECT MAX(id_online) FROM cpj_online)');
+
+$autoLocutor = ($data===PDOWARNING || $data['vigente']=='0')?true:false;
 if($autoLocutor)
 {
 
@@ -101,10 +104,12 @@ else
 $facebook = ($data['url_facebook']=='')?'':"<a href='{$data['url_facebook']}' target='_blank'><img src='/selectdj/_images/facebook.png'></a>";
 $twitter = ($data['url_twitter']=='')?'':"<a href='{$data['url_twitter']}' target='_blank'><img src='/selectdj/_images/twitter.png'></a>";
 $googleplus = ($data['url_googleplus']=='')?'':"<a href='{$data['url_googleplus']}' target='_blank'><img src='/selectdj/_images/google.png'></a>";
+$youtube = ($data['url_youtube']=='')?'':"<a href='{$data['url_youtube']}' target='_blank'><img src='/selectdj/_images/youtube.png'></a>";
 
 
 ?>
 <section id='locutor_online'>
+    <?php echo "<!-- {$data['id_online']} - {$data['id_user']} -->"; ?>
     <article>
         <div class="foto_locutor">
             <img src="<?php echo $data['fotografia']; ?>">
@@ -137,6 +142,7 @@ $googleplus = ($data['url_googleplus']=='')?'':"<a href='{$data['url_googleplus'
                 echo "{$facebook}\n";
                 echo "{$twitter}\n";
                 echo "{$googleplus}\n";
+                echo "{$youtube}\n";
                 ?>
             </div>
         </div>
