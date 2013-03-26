@@ -58,6 +58,10 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
                 <td><input type='text' value='{$data['user_name']}' readonly='readonly' disabled='disabled' /></td>
             </tr>
             <tr>
+                <th class='ui-widget-header'>Password</th>
+                <td><input type='password' id='uWuser_passW{$data['id_user']}' {$codeInput} /></td>
+            </tr>
+            <tr>
                 <th class='ui-widget-header'>Nickname</th>
                 <td><input type='text' id='uWnick_nameW{$data['id_user']}' value='{$data['nick_name']}' {$codeInput} /></td>
             </tr>
@@ -114,6 +118,7 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
                 <td><input id='uWfotografiaW{$data['id_user']}' type='file' name='files[]' data-url='_upload/server/php/' multiple>
                 {$foto}
                 </td>
+            </tr>
         </tbody>
         </table>
         ";

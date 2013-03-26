@@ -53,11 +53,17 @@ if(isset($_POST))
                         }
                     }
                     break;
-
                 default:
                      //nada
                     break;
             }
+        }
+
+        // Tratamiento especial
+        switch ($field) {
+            case 'user_pass':
+                $caption = md5($caption);
+                break;
         }
 
         $sql    = "UPDATE {$table} SET {$field}=? WHERE {$fieldPK}=? ";

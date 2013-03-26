@@ -13,7 +13,7 @@ function inicio () {
     else{
       $( "#divlogin" ).dialog({
         autoOpen: true,
-        height: 320,
+        height: 350,
         width: 350,
         modal: true,
         buttons: {
@@ -24,9 +24,7 @@ function inicio () {
               var logueando = $.post( url, formValues, showPrincipal, "json" );
               logueando.done(function(data){
                 $( "#divlogin" ).dialog( "close" );
-
               });
-
           },
           Cancel: function() {
             $( this ).dialog( "close" );
@@ -168,7 +166,7 @@ function mulaChecksum(s)
   var chk = 0x12345678;
 
   for (i = 0; i < s.length; i++) {
-    chk += (s.charCodeAt(i) * i);
+    chk += (s.charCodeAt(i) * (i+1));
   }
 
   return chk;

@@ -38,20 +38,30 @@
 }
 #locutor_online .locu p
 {
-    color: #999999;
+    color: #333333;
     margin: -0.3em 0 0 2em;
 }
 #locutor_online .locu label
 {
-    color: white;
+    color: #0080FF;
     font-family: Open Sans Condensed;
     font-weight: bold;
-    text-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.7);
+    /*text-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.7);*/
 }
 
-
-#locutor_online #locutor_nickname
+#locutor_online .logos_sociales
 {
+    display: inline-block;
+    margin-top: 1em;
+}
+
+#locutor_online .logos_sociales a {
+    display: inline-block;
+}
+
+#locutor_online p.nickname
+{
+    color: #666666;
     font-size: 2em;
     font-weight: bold;
     margin: 0.5em 0;
@@ -62,10 +72,6 @@
     text-transform: capitalize;
 }
 
-#locutor_online .locu .logos_sociales
-{
-    margin-top: 1em;
-}
 
 </style>
 <?php
@@ -111,18 +117,28 @@ $youtube = ($data['url_youtube']=='')?'':"<a href='{$data['url_youtube']}' targe
 <section id='locutor_online'>
     <?php echo "<!-- {$data['id_online']} - {$data['id_user']} -->"; ?>
     <article>
-        <div class="foto_locutor">
-            <img src="<?php echo $data['fotografia']; ?>">
+        <div id="header_locutor">
+            <div class="foto_locutor">
+                <img src="<?php echo $data['fotografia']; ?>">
+            </div>
+            <div class="logos_sociales">
+                <?php
+                echo "{$facebook}\n";
+                echo "{$twitter}\n";
+                echo "{$googleplus}\n";
+                echo "{$youtube}\n";
+                ?>
+            </div>
         </div>
         <div class="locu">
-            <p id="locutor_nickname">
+            <!--
+            <p class="nickname">
                 <?php echo $data['nick_name']; ?>
-            </p>
+            </p> -->
             <label for='locutor_nombre'>Nombre</label>
             <p id="locutor_nombre">
                 <?php echo $data['first_name'].' '.$data['last_name']; ?>
             </p>
-
             <label for='locutor_programacion'>Programacion</label>
             <p id="locutor_programacion">
                 <?php echo $data['programas']; ?>
@@ -137,14 +153,7 @@ $youtube = ($data['url_youtube']=='')?'':"<a href='{$data['url_youtube']}' targe
             <p id="locutor_horario">
                 <?php echo $data['horarios']; ?>
             </p>
-            <div class="logos_sociales">
-                <?php
-                echo "{$facebook}\n";
-                echo "{$twitter}\n";
-                echo "{$googleplus}\n";
-                echo "{$youtube}\n";
-                ?>
-            </div>
+
         </div>
     </article>
 </section>
