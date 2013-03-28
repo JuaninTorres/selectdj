@@ -12,7 +12,7 @@ if(isset($_POST['user_name']) && $_SESSION['auth']['user_admin']==='1')
         $connection = new connectPDO;
 
         $sql = 'INSERT INTO cpj_users (user_name) VALUES (?)';
-        $params = array($_POST['user_name']);
+        $params = array(strtolower($_POST['user_name']));
 
         $resultado = $connection->exec($sql,$params);
         if($resultado===PDOERROR)

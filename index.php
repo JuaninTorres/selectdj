@@ -46,7 +46,7 @@ else
         <button id='btn_ingresar'>Ingresar</button>
     </div>
     <div id='div_user_logueado'>
-        <span id='saludo_user_logueado'></span><span id='user_logueado'></span><button id='btn_logout'>Salir</button>
+        <span id='saludo_user_logueado'></span><span id='user_logueado'></span><span id='hora_server'></span><button id='btn_logout'>Salir</button>
     </div>
     <div id='principal'></div>
 <?php

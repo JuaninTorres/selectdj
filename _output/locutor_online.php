@@ -8,13 +8,13 @@
 
 #locutor_online
 {
-    color: #808080;
+    color: white;
     font-family: Open Sans;
     font-size: 16px;
 }
 #locutor_online article
 {
-    background: #E8E8E8;
+    background: white;
     border-radius: 1em;
     padding: 0.5em;
 }

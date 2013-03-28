@@ -222,3 +222,6 @@ folder_principal/
 
 # Evitamos colocar los archivos subidos
 _upload/_files/*
+
+# Clave de putty
+*.ppk

@@ -49,6 +49,16 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
         }
         $foto = "<img src='{$srcFoto}' border='0' id='fotoW{$data['id_user']}' />";
 
+        // veamos tipo de usuario
+        $tiposPosibles = array('Normal','Administrador');
+        $tipoUsuario = "<div id='tipo_usuario'>";
+        foreach ($tiposPosibles as $index => $tipo) {
+            $checked=($index==$data['user_admin'])?"checked='checked'":'';
+            $tipoUsuario .= "<input type='radio' id='tipo_{$index}' name=uWuser_adminW{$data['id_user']} value='{$index}' {$codeInputRadio} {$checked}/><label for='tipo_{$index}'>".ucfirst($tipo)."</label>";
+        }
+        $tipoUsuario .= "</div>";
+        $jsCall[] = "$('#tipo_usuario').buttonset()";
+
         // Comenzamos a dibujar
         $html = "
         <table id='modificion_usuario' class='ui-widget'>
@@ -80,6 +90,10 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
             <tr>
                 <th class='ui-widget-header'>Estado</th>
                 <td>{$estadoUsuario}</td>
+            </tr>
+            <tr>
+                <th class='ui-widget-header'>Tipo de usuario</th>
+                <td>{$tipoUsuario}</td>
             </tr>
             <tr>
                 <th class='ui-widget-header'>Programación</th>

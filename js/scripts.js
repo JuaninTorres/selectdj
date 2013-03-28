@@ -48,6 +48,9 @@ function inicio () {
     }
 
   }, "json");
+
+  // Actualizo la hora
+  setInterval(setFechaHoraServer,1000);
 }
 
 function showPrincipal (data)
@@ -128,7 +131,12 @@ function showListadoUsuarios()
         }
       });
 }
-
+function setFechaHoraServer()
+{
+  var saliendo = $.get( 'now.php', function(data){
+    $('#hora_server').html('['+data.ahora+']');
+  }, "json" );
+}
 function showError(mensaje)
 {
   $('#divMensajeError div p span.contenido').text(mensaje);

@@ -12,8 +12,8 @@ if(isset($_POST))
     $params = array($_POST['login_user'],md5($_POST['login_pass']));
 
     // parche para desarrollo
-    $sql = 'SELECT * FROM cpj_users limit 1';
-    $params = array();
+    // $sql = 'SELECT * FROM cpj_users limit 1';
+    // $params = array();
 
 
     $data = $connection->getrow($sql,$params);
