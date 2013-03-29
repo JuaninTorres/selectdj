@@ -27,8 +27,20 @@ if(isset($_SESSION['auth']['id_user']))
             throw new Exception('No existe el usuario', 1);
         }
 
+        $jsCall[] = "$('#change_my_pass').button({icons: { primary: 'ui-icon-locked'}}).click(btnCambioPass);";
         // Comenzamos a dibujar
         $html = "
+        <div id='divchangepass' title='Cambio de password'>
+            <form action='cambio_pass.php' id='formchangepass' name='formchangepass'>
+                <fieldset>
+                    <label for='change_pass_1'>Nuevo Password</label>
+                    <input type='password' name='change_pass_1' id='change_pass_1' class='text ui-widget-content ui-corner-all' />
+                    <label for='change_pass_2'>Reingrese el nuevo Password</label>
+                    <input type='password' name='change_pass_2' id='change_pass_2' class='text ui-widget-content ui-corner-all' />
+                </fieldset>
+            </form>
+        </div>
+        <button id='change_my_pass'>Cambiar mi Password</button>
         <table id='modificion_usuario' class='ui-widget'>
         <tbody class='ui-widget-content'>
             <tr>
@@ -94,6 +106,7 @@ if(isset($_SESSION['auth']['id_user']))
     echo json_encode(
         array(
             'contenido'=>$html,
+            'jscall'=>implode(';', $jsCall),
         )
     );
 }

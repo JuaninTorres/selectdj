@@ -18,7 +18,7 @@ input.text { margin-bottom:12px; width:95%; padding: .4em; }
     display: none;
     text-align: right;
 }
-#divlogin { display: none; }
+#divlogin, #divchangepass { display: none; }
 #divMensajeError
 {
     display: none;

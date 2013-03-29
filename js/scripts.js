@@ -148,6 +148,50 @@ function hideError()
   $('#divMensajeError').hide('fast');
 }
 
+function btnCambioPass(){
+  $( '#divchangepass' ).dialog({
+  height: 350,
+  width: 350,
+  modal: true,
+  buttons: {
+    'Cambiar': function() {
+        // Revisamos que todo este OK
+        var pass1 = $('#change_pass_1').val(),
+            pass2 = $('#change_pass_2').val();
+        if(pass1.length === 0)
+        {
+          alert('El Password no puede estar vacio');
+        }
+        else
+        {
+            if(pass1!=pass2)
+            {
+              alert('Los Password no son iguales');
+            }
+            else
+            {
+              var formValues = $('#formchangepass').serialize(),
+              url = $('#formchangepass').attr( 'action' );
+              var logueando = $.post( url, formValues, function(data){
+                alert(data.msg);
+                if(data.errores===0)
+                {
+                  $( '#divchangepass' ).dialog( 'close' );
+                }
+              }, 'json' );
+            }
+        }
+    },
+    Cancelar: function() {
+      $( this ).dialog( 'close' );
+    }
+  },
+  close: function() {
+    $('#formchangepass')[0].reset();
+  }
+});
+}
+
 function guardando(valor,id_valor, checked)
 {
   var url = 'save.php',

@@ -98,6 +98,7 @@ if(isset($_SESSION['auth']))
         </fieldset>";
     $jsCall[]="\$.get('modificacion_personal.php',function(data){
                 \$('#modificacion_personal').html(data.contenido);
+                eval(data.jscall);
             },'json');
     ";
 
