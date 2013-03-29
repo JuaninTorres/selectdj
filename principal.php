@@ -91,12 +91,22 @@ if(isset($_SESSION['auth']))
                     },'json' );
     })";
 
+    $titulos[] = 'Mis Datos';
+    $contenidos[] = "<fieldset class='ui-widget ui-widget-content'>
+        <legend class='ui-widget-header ui-corner-all'>Esta es mi información</legend>
+        <div id='modificacion_personal'></div>
+        </fieldset>";
+    $jsCall[]="\$.get('modificacion_personal.php',function(data){
+                \$('#modificacion_personal').html(data.contenido);
+            },'json');
+    ";
+
     // Ahora vemos si es administrador, si es asi... le damos las opciones
     if($_SESSION['auth']['user_admin']=='1')
     {
         $titulos[] = 'Administracion de usuarios';
         $contenidos[] = "<fieldset class='ui-widget ui-widget-content'>
-            <legend class='ui-widget-header ui-corner-all'>Usuario del sistema</legend>
+            <legend class='ui-widget-header ui-corner-all'>Usuarios del sistema</legend>
             <div id='listado_usuarios'></div>
             </fieldset>";
         $jsCall[]="\$.get('listado_usuarios.php',function(data){

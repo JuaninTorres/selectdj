@@ -18,12 +18,14 @@ if(isset($_POST))
 
     $tableA = array(
         'o' => 'cpj_online',
-        'u' => 'cpj_users'
+        'u' => 'cpj_users',
+        'up' => 'cpj_users'
         );
 
     $fieldsPK = array(
         'o' => 'id_online',
-        'u' => 'id_user'
+        'u' => 'id_user',
+        'up' => 'id_user'
         );
 
     $table       = $tableA[$tableT];
