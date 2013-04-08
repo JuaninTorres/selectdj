@@ -35,7 +35,11 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
             $estadoUsuario .= "<input type='radio' id='estado_{$estado}' name=uWuser_statusW{$data['id_user']} value='{$estado}' {$codeInputRadio} {$checked}/><label for='estado_{$estado}'>".ucfirst($estado)."</label>";
         }
         $estadoUsuario .= "</div>";
-        $jsCall[] = "$('#estado_usuario').buttonset()";
+        $estadoUsuario .= "<button id='btn_eliminar_user_{$id}' rel='{$data['user_name']}'>Eliminar</button>";
+        $jsCall[] = "\$('#estado_usuario').buttonset()";
+        $jsCall[] = "\$('#btn_eliminar_user_{$id}').button({icons: { primary: 'ui-icon-trash'}}).click(function(){
+            confirmEliminaUsuario(\$(this).attr('rel'));
+        })";
 
         // Foto
         if($data['fotografia']=='' || !is_file(urldecode(DOCUMMENT_ROOT.$data['fotografia'])))
@@ -57,10 +61,10 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
             $tipoUsuario .= "<input type='radio' id='tipo_{$index}' name=uWuser_adminW{$data['id_user']} value='{$index}' {$codeInputRadio} {$checked}/><label for='tipo_{$index}'>".ucfirst($tipo)."</label>";
         }
         $tipoUsuario .= "</div>";
-        $jsCall[] = "$('#tipo_usuario').buttonset()";
+        $jsCall[] = "\$('#tipo_usuario').buttonset()";
 
         // Comenzamos a dibujar
-        $html = "
+        $html = "<div id='modalModificarUsuario'></div>
         <table id='modificion_usuario' class='ui-widget'>
         <tbody class='ui-widget-content'>
             <tr>
@@ -136,17 +140,15 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
         </tbody>
         </table>
         ";
-        $jsCall[]="$(function () {
-                        $('#uWfotografiaW{$data['id_user']}').fileupload({
-                            dataType: 'json',
-                            done: function (e, data) {
-                                $.each(data.result.files, function (index, file) {
-                                    $('#fotoW{$data['id_user']}').attr('src',file.url);
-                                    guardando(file.url,'uWfotografiaW{$data['id_user']}');
-                                    console.log(file);
-                                });
-                            }
-                        });
+        $jsCall[]="\$('#uWfotografiaW{$data['id_user']}').fileupload({
+                        dataType: 'json',
+                        done: function (e, data) {
+                            \$.each(data.result.files, function (index, file) {
+                                \$('#fotoW{$data['id_user']}').attr('src',file.url);
+                                guardando(file.url,'uWfotografiaW{$data['id_user']}');
+                                console.log(file);
+                            });
+                        }
                     });";
     }
     catch(Exception $e)

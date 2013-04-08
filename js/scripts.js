@@ -62,7 +62,6 @@ function showPrincipal (data)
     var logueado = $.get('principal.php', function(dataLogueado){
       $('#principal').html(dataLogueado.contenido);
       eval(dataLogueado.jscall);
-      console.log(dataLogueado.session);
 
       $('#div_user_logueado').show('fast');
       $('#saludo_user_logueado').html('Hola, estas autenticado como ');
@@ -95,6 +94,13 @@ function showPrincipal (data)
     alert(data.msg);
   }
 }
+function getListadoUsuarios()
+{
+  $.get('listado_usuarios.php',function(data){
+    $('#listado_usuarios').html(data.contenido);
+    eval(data.jscall);
+  },'json');
+}
 function showListadoUsuarios()
 {
   $('#usuarios tr td button').button({icons: { primary: 'ui-icon-pencil'}}
@@ -113,10 +119,7 @@ function showListadoUsuarios()
             if(data.errores===0)
             {
               // Aqui deberia volver a dibujar
-              $.get('listado_usuarios.php',function(data){
-                $('#listado_usuarios').html(data.contenido);
-                eval(data.jscall);
-              },'json');
+              getListadoUsuarios();
               hideError();
             }
             else
@@ -150,11 +153,11 @@ function hideError()
 
 function btnCambioPass(){
   $( '#divchangepass' ).dialog({
-  height: 350,
-  width: 350,
-  modal: true,
-  buttons: {
-    'Cambiar': function() {
+    height: 350,
+    width: 350,
+    modal: true,
+    buttons: {
+      'Cambiar': function() {
         // Revisamos que todo este OK
         var pass1 = $('#change_pass_1').val(),
             pass2 = $('#change_pass_2').val();
@@ -181,15 +184,15 @@ function btnCambioPass(){
               }, 'json' );
             }
         }
+      },
+      Cancelar: function() {
+        $( this ).dialog( 'close' );
+      }
     },
-    Cancelar: function() {
-      $( this ).dialog( 'close' );
+    close: function() {
+      $('#formchangepass')[0].reset();
     }
-  },
-  close: function() {
-    $('#formchangepass')[0].reset();
-  }
-});
+  });
 }
 
 function guardando(valor,id_valor, checked)
@@ -232,7 +235,8 @@ function editInputCRC(e)
 {
   setCacheInput(e);
 }
-function editInputCRCOff(e){
+function editInputCRCOff(e)
+{
   var guardar=false;
   //calculo placeholder
   var ph='cualquiertonteranuncausada....,,,,';
@@ -252,28 +256,48 @@ function editInputCRCOff(e){
   if ($(e).val()==ph){
     evalue='';
     $(e).val('');
-    console.log('place holder');
     if (currentcrc!==''){
       //a menos que antes hubiera un valor guardado!.. o sea limpio
       guardar=true;
-      console.log('place holder->limpia()');
     }
   }
   else if (currentcrc==='' && evalue!=='')
   {
     guardar=true;
-    console.log('es mi primera vez!!');
   }else if (currentcrc!=evaluecrc){
     //si son distintos... guardo
     guardar=true;
-    console.log('no es igual al ultimo crc');
   }
   if (guardar){
-    console.log('guardo');
     // La respuesta en ajax a xajax_neditcell(evalue,e.id);
     guardando($(e).val(),$(e).attr('id'));
     setCacheInput(e);
-  }else{
-    console.log('no guardo');
   }
+}
+function confirmEliminaUsuario(user)
+{
+  $( "#modalModificarUsuario" ).attr('title','Eliminación de usuario')
+    .html("<p><span class='ui-icon ui-icon-alert' style='float: left; margin: 0 7px 20px 0;'></span>¿Está seguro de eliminar a este usuario? Recuerde que al hacerlo, se eliminará toda la información asociada a él.</p>")
+    .dialog({
+      resizable: false,
+      height:280,
+      width: 400,
+      modal: true,
+      buttons: {
+        "Eliminar": function() {
+          var eliminando = $.post( 'delete_usuario.php', {user_name: user}, function(data){
+            alert(data.contenido);
+            if(data.errores===0)
+            {
+              getListadoUsuarios();
+            }
+          }, "json" );
+
+          $( this ).dialog( "close" );
+        },
+        Cancelar: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
 }

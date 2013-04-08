@@ -110,11 +110,7 @@ if(isset($_SESSION['auth']))
             <legend class='ui-widget-header ui-corner-all'>Usuarios del sistema</legend>
             <div id='listado_usuarios'></div>
             </fieldset>";
-        $jsCall[]="\$.get('listado_usuarios.php',function(data){
-                    \$('#listado_usuarios').html(data.contenido);
-                    eval(data.jscall);
-                },'json');
-        ";
+        $jsCall[]="getListadoUsuarios()";
     }
 
     // Procesamos los contenidos
