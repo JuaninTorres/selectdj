@@ -225,3 +225,6 @@ _upload/_files/*
 
 # Clave de putty
 *.ppk
+
+# Test simplemente inutiles
+test.php
