@@ -17,9 +17,9 @@ if(isset($_POST))
     $validame   = $tmp[4];
 
     $tableA = array(
-        'o' => 'cpj_online',
-        'u' => 'cpj_users',
-        'up' => 'cpj_users'
+        'o' => $connectPDO_prefix.'_online',
+        'u' => $connectPDO_prefix.'_users',
+        'up' => $connectPDO_prefix.'_users'
         );
 
     $fieldsPK = array(
@@ -48,7 +48,7 @@ if(isset($_POST))
             switch ($validame) {
                 case 'user_name':
                     if(!is_null($caption)){
-                        $n = $connection->getone('SELECT count(*) FROM cpj_users WHERE user_name=? and id_user <> ?',array($caption,$id));
+                        $n = $connection->getone('SELECT count(*) FROM$connectPDO_prefix.'_users WHERE user_name=? and id_user <> ?',array($caption,$id));
                         if($n>0){
                             $jsMessage = "alert('Username ingresado se encuentra asociado a otro usuario ...');$('#{$id_e}').val('{$valoractual}');";
                             throw new Exception($jsMessage, 1);

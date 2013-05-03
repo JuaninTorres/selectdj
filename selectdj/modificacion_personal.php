@@ -12,7 +12,7 @@ if(isset($_SESSION['auth']['id_user']))
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
 
-    $sql = 'SELECT * FROM cpj_users WHERE id_user = ?';
+    $sql = 'SELECT * FROM '.$connectPDO_prefix.'_users WHERE id_user = ?';
     $params = array($id);
 
     try

@@ -7,7 +7,7 @@ if(isset($_POST))
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
 
-    $sql = 'INSERT INTO cpj_anuncios (id_user,titulo,url_imagen,url_link) VALUES (?,?,?,?)';
+    $sql = 'INSERT INTO '.$connectPDO_prefix.'_anuncios (id_user,titulo,url_imagen,url_link) VALUES (?,?,?,?)';
     $params = array($_SESSION['auth']['id_user'],$_POST['anuncio_titulo'],$_POST['anuncio_imagen'],$_POST['anuncio_url_link']);
 
 

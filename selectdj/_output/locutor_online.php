@@ -79,9 +79,9 @@
 require_once('../class/connectPDO.php');
 $connection = new connectPDO;
 
-$data = $connection->getrow('SELECT cpj_online.id_online, NOW() BETWEEN tiempo_desde AND tiempo_hasta as vigente,cpj_users.*
-FROM cpj_online,cpj_users
-WHERE cpj_users.id_user = cpj_online.id_user AND id_online = (SELECT MAX(id_online) FROM cpj_online)');
+$data = $connection->getrow('SELECT '.$connectPDO_prefix.'_online.id_online, NOW() BETWEEN tiempo_desde AND tiempo_hasta as vigente,'.$connectPDO_prefix.'_users.*
+FROM '.$connectPDO_prefix.'_online,'.$connectPDO_prefix.'_users
+WHERE '.$connectPDO_prefix.'_users.id_user = '.$connectPDO_prefix.'_online.id_user AND id_online = (SELECT MAX(id_online) FROM '.$connectPDO_prefix.'_online)');
 
 $autoLocutor = ($data===PDOWARNING || $data['vigente']=='0')?true:false;
 if($autoLocutor)

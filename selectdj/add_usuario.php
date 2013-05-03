@@ -11,7 +11,7 @@ if(isset($_POST['user_name']) && $_SESSION['auth']['user_admin']==='1')
         require_once('class/connectPDO.php');
         $connection = new connectPDO;
 
-        $sql = 'INSERT INTO cpj_users (user_name) VALUES (?)';
+        $sql = 'INSERT INTO '.$connectPDO_prefix.'_users (user_name) VALUES (?)';
         $params = array(strtolower($_POST['user_name']));
 
         $resultado = $connection->exec($sql,$params);

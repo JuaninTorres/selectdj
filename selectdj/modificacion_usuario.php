@@ -10,7 +10,7 @@ if(isset($_POST['id_user']) && $_SESSION['auth']['user_admin']==='1')
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
 
-    $sql = 'SELECT * FROM cpj_users WHERE id_user = ?';
+    $sql = 'SELECT * FROM '.$connectPDO_prefix.'_users WHERE id_user = ?';
     $params = array($_POST['id_user']);
 
     try

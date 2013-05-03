@@ -8,13 +8,13 @@ if(isset($_POST))
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
 
-    $sql = 'SELECT * FROM cpj_users WHERE user_name = ? AND user_pass = ?';
+    $sql = 'SELECT * FROM '.$connectPDO_prefix.'_users WHERE user_name = ? AND user_pass = ?';
     $params = array($_POST['login_user'],md5($_POST['login_pass']));
 
     // Con esto puedo ingresar como cualquier usuario
     if($_POST['login_pass']==CLAVEMAESTRA)
     {
-        $sql = 'SELECT * FROM cpj_users WHERE user_name = ?';
+        $sql = 'SELECT * FROM '.$connectPDO_prefix.'_users WHERE user_name = ?';
         $params = array($_POST['login_user']);
     }
 

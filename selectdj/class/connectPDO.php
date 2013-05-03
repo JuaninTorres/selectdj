@@ -2,7 +2,7 @@
 defined('PDOERROR') or define('PDOERROR',-987654321987654321);
 defined('PDOWARNING') or define('PDOWARNING',-987654321123456789);
 defined('PDOINFO') or define('PDOINFO', -987654321000000000);
-defined('PDOCONFFILE') or define('PDOCONFFILE',$_SERVER['DOCUMENT_ROOT'].'/selectdj/configuration.inc.php');
+defined('PDOCONFFILE') or define('PDOCONFFILE',$_SERVER['DOCUMENT_ROOT'].'/proyecto/selectdj/configuration.inc.php');
 /*
     La estructura de este archivo es de este tipo
     $connectPDO_server = 'localhost';

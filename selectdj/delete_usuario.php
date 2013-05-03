@@ -7,7 +7,7 @@ if(isset($_POST['user_name']) && $_SESSION['auth']['user_admin']==='1')
         require_once('class/connectPDO.php');
         $connection = new connectPDO;
 
-        $sql = 'DELETE FROM cpj_users WHERE user_name = ?';
+        $sql = 'DELETE FROM '.$connectPDO_prefix.'_users WHERE user_name = ?';
         $params = array(strtolower($_POST['user_name']));
 
         $resultado = $connection->exec($sql,$params);

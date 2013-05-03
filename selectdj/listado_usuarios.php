@@ -4,7 +4,7 @@ if($_SESSION['auth']['user_admin']==='1')
 {
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
-    $sql = 'SELECT * FROM cpj_users';
+    $sql = 'SELECT * FROM '.$connectPDO_prefix.'_users';
     try
     {
         $dataEx = $connection->Execute($sql);

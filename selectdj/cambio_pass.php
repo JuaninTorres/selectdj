@@ -7,7 +7,7 @@ if(isset($_POST))
     require_once('class/connectPDO.php');
     $connection = new connectPDO;
 
-    $sql = 'UPDATE cpj_users SET user_pass = ? WHERE id_user = ?';
+    $sql = 'UPDATE '.$connectPDO_prefix.'_users SET user_pass = ? WHERE id_user = ?';
     $params = array(md5($_POST['change_pass_1']),$_SESSION['auth']['id_user']);
 
     $data = $connection->exec($sql,$params);
